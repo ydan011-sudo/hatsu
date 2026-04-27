@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Té Hatsu - Naturaleza Redefinida</title>
+    <style>
+        /* Variables de color */
+        :root {
+            --color-primario: #0e5b63;
+            --color-acento: #b4d334;
+            --color-texto: #333333;
+            --color-fondo: #f9f9f9;
+            --gradiente-hero: linear-gradient(90deg, #1d616d 0%, #4a4572 50%, #9e2b61 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+        }
+
+        /* --- NAVEGACIÓN --- */
+        header {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--color-primario);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-texto);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .btn-nav {
+            background-color: var(--color-primario);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: var(--gradiente-hero);
+            color: white;
+            padding: 6rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text { max-width: 50%; }
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; }
+        .hero-text p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+
+        .btn-hero {
+            background-color: var(--color-acento);
+            color: #000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .hero-image { width: 45%; text-align: center; }
+        .hero-image img { 
+            max-width: 100%; 
+            height: auto; 
+            cursor: zoom-in; /* Indica que se puede ampliar */
+            transition: transform 0.3s;
+        }
+
+        /* --- SECCIÓN PRODUCTOS --- */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem 5%;
+            background-color: #f1f4f4;
+        }
+
+        .products-grid { display: flex; flex-direction: column; gap: 2rem; }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .product-card img { 
+            width: 80px; 
+            height: auto; 
+            cursor: zoom-in; 
+            transition: 0.3s;
+        }
+        
+        .product-card img:hover { transform: scale(1.05); }
+
+        .product-info h3 { color: var(--color-primario); margin-bottom: 0.5rem; font-size: 1.4rem; }
+        .product-info p { font-size: 0.85rem; color: #666; margin-bottom: 0.5rem; }
+
+        .btn-small {
+            background-color: var(--color-primario);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .btn-small.green { background-color: var(--color-acento); color: #000; }
+
+        /* --- CARACTERÍSTICAS --- */
+        .features-section h2 { font-size: 2rem; margin-bottom: 2rem; text-align: center; }
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: center; }
+        .feature-item img { width: 60px; margin-bottom: 1rem; }
+
+        /* --- MODAL (EFECTO AMPLIAR) --- */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9); /* Fondo negro transparente */
+            text-align: center;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80vh;
+            animation: zoom 0.3s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)} 
+            to {transform:scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- FOOTER --- */
+        footer { background-color: var(--color-primario); color: white; padding: 3rem 5% 1rem; text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1rem 0; }
+        .footer-links a { color: white; text-decoration: none; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="imgAmpliada">
+    </div>
+
+    <header>
+        <div class="logo">🍃 HATSU</div>
+        <nav>
+            <ul>
+                <li><a href="#">Soda</a></li>
+                <li><a href="#">Tea</a></li>
+                <li><a href="#">Acerca de</a></li>
+                <li><a href="#">Tienda</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="btn-nav">ENCUENTRA TU TIENDA</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>NATURALEZA.<br>REDEFINIDA.</h1>
+            <p>Descubre la fusión perfecta de botánicos puros y precisión tecnológica.</p>
+            <button class="btn-hero">COMPRAR AHORA</button>
+        </div>
+        <div class="hero-image">
+            <img src="https://raw.githubusercontent.com/ydan011-sudo/hatsu/refs/heads/main/Gemini_Generated_Image_a5deula5deula5de.png" alt="Botellas Hatsu" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <section class="main-content">
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://raw.githubusercontent.com/ydan011-sudo/hatsu/refs/heads/main/boceto%20juan%20afanador.png" alt="Hatsu Soda" onclick="openModal(this)">
+                <div class="product-info">
+                    <h3>HATSU SODA</h3>
+                    <p>Rediseño hecho por:</p>
+                    <p><strong>Juan Ferlipe Afanador Bonilla</strong></p>
+                    <button class="btn-small green">Saber más</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://raw.githubusercontent.com/ydan011-sudo/hatsu/refs/heads/main/boceto%20dayanna.png" alt="Hatsu Tea" onclick="openModal(this)">
+                <div class="product-info">
+                    <h3>HATSU TEA REDEFINE</h3>
+                    <p>Rediseño hecho por:</p>
+                    <p><strong>Dayanna Fernández Meza</strong></p>
+                    <button class="btn-small">Saber más</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>Por qué somos diferentes</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <img src="https://raw.githubusercontent.com/ydan011-sudo/hatsu/refs/heads/main/hoja.png" alt="Ingredientes">
+                    <h4>Ingredientes Puros</h4>
+                    <p>Selección rigurosa de botánicos.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="https://raw.githubusercontent.com/ydan011-sudo/hatsu/refs/heads/main/chip.png" alt="Bioingeniería">
+                    <h4>Bioingeniería</h4>
+                    <p>Tecnología de extracción avanzada.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="https://raw.githubusercontent.com/ydan011-sudo/hatsu/refs/heads/main/granada.png" alt="Sabor">
+                    <h4>Sabor Infalible</h4>
+                    <p>Equilibrio perfecto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">HATSU</div>
+        <div class="footer-links">
+            <a href="#">Términos</a>
+            <a href="#">Acerca de</a>
+            <a href="#">Contacto</a>
+        </div>
+        <p class="copyright">© 2026 HATSU Beverages - Colombia.</p>
+    </footer>
+
+    <script>
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("imgAmpliada");
+
+        // Función para abrir el modal
+        function openModal(element) {
+            modal.style.display = "block";
+            modalImg.src = element.src;
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Cerrar también si se hace clic fuera de la imagen
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>
